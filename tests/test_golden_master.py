@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from main.tennis_game import TennisGame1
+from main.tennis_game import TennisGame
 
 
 class GoldenMasterTest(unittest.TestCase):
@@ -29,7 +29,7 @@ class GoldenMasterTest(unittest.TestCase):
         for data in self.test_cases:
             name_of_first_player, name_of_second_player, score_player1, score_player2 = data
             try:
-                game = TennisGame1(name_of_first_player, name_of_second_player)
+                game = TennisGame(name_of_first_player, name_of_second_player)
                 result = self.check_all_scores(game, score_player1, score_player2)
             except Exception as e:
                 result = type(e).__name__ + " " + str(e)
@@ -42,7 +42,7 @@ class GoldenMasterTest(unittest.TestCase):
         for data in self.test_cases:
             name_of_first_player, name_of_second_player, score_player1, score_player2 = data
             try:
-                game = TennisGame1(name_of_first_player, name_of_second_player)
+                game = TennisGame(name_of_first_player, name_of_second_player)
                 result = self.check_all_scores(game, score_player1, score_player2)
             except Exception as e:
                 result = type(e).__name__ + " " + str(e)
