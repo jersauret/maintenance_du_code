@@ -57,3 +57,11 @@ class TennisGame():
                     3: "Forty",
                 }[temp_score]
         return result
+
+    def get_score(self, player1_points, player2_points):
+        return {
+            1: "Advantage player1",
+            -1: "Advantage player2",
+            2: "Win for player1",
+            -2: "Win for player2",
+        }[self - player2_points]

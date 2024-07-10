@@ -2,8 +2,6 @@
 
 import unittest
 
-
-
 test_cases = [
     (0, 0, "Love-All", 'player1', 'player2'),
     (1, 1, "Fifteen-All", 'player1', 'player2'),
@@ -46,14 +44,16 @@ test_cases = [
 
 ]
 
+
 def play_game(TennisGame1, p1Points, p2Points, p1Name, p2Name):
-    game = TennisGame1( p1Name, p2Name)
+    game = TennisGame1(p1Name, p2Name)
     for i in range(max(p1Points, p2Points)):
         if i < p1Points:
             game.won_point(p1Name)
         if i < p2Points:
             game.won_point(p2Name)
     return game
+
 
 if __name__ == "__main__":
     unittest.main()
