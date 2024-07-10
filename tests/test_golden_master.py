@@ -24,6 +24,7 @@ class GoldenMasterTest(unittest.TestCase):
                 test_cases.append(("player1", "", score_player1, score_player2))
         return test_cases
 
+    @unittest.skip("Skip Golden Master Test")    
     def test_record(self):
         for data in self.test_cases:
             name_of_first_player, name_of_second_player, score_player1, score_player2 = data
@@ -37,20 +38,20 @@ class GoldenMasterTest(unittest.TestCase):
             with open(os.path.join(self.Dir, file_name), "w") as f:
                 f.write(result)
    
-#    def test_replay(self):
-#        for data in self.test_cases:
-#            name_of_first_player, name_of_second_player, score_player1, score_player2 = data
-#            try:
-#                game = TennisGame(name_of_first_player, name_of_second_player)
-#                result = self.check_all_scores(game, score_player1, score_player2)
-#            except Exception as e:
-#                result = type(e).__name__ + " " + str(e)
+    def test_replay(self):
+        for data in self.test_cases:
+            name_of_first_player, name_of_second_player, score_player1, score_player2 = data
+            try:
+                game = TennisGame(name_of_first_player, name_of_second_player)
+                result = self.check_all_scores(game, score_player1, score_player2)
+            except Exception as e:
+                result = type(e).__name__ + " " + str(e)
     
-#            file_name = f"{score_player1}-{score_player2}-{name_of_first_player}-{name_of_second_player}.txt"
-#            with open(os.path.join(self.Dir, file_name), "r") as f:
-#                expected = f.read()
-#    
-#            self.assertMultiLineEqual(expected, result)
+            file_name = f"{score_player1}-{score_player2}-{name_of_first_player}-{name_of_second_player}.txt"
+            with open(os.path.join(self.Dir, file_name), "r") as f:
+                expected = f.read()
+    
+            self.assertMultiLineEqual(expected, result)
 
     def check_all_scores(self, game, player1_score, player2_score):
         highest_score = max(player1_score, player2_score)
