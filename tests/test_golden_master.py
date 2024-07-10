@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from old.tennis_game import TennisGame
+from main.tennis1 import TennisGame1 as TennisGame
 
 
 class GoldenMasterTest(unittest.TestCase):
