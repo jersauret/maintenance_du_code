@@ -57,8 +57,8 @@ class GoldenMasterTest(unittest.TestCase):
         highest_score = max(player1_score, player2_score)
         for i in range(highest_score):
             if i < player1_score:
-                game.won_point("player1")
+                game.increment_player_points("player1")
             if i < player2_score:
-                game.won_point("player2")
+                game.increment_player_points("player2")
 
         return game.score()
