@@ -2,7 +2,25 @@
 
 import unittest
 
+def play_game(p1_points, p2_points, p1_name, p2_name):
+    game = TennisGame(p1_points, p2_points, p1_name, p2_name)
+    return game.get
 
+def writetofile(file_name, score):
+    with open(file_name, 'w') as file:
+        file.write(score)
+
+def getFileName(score, p1_name, p2_name):
+    return f"test_get_score_game1_{score}_{p1_name}_{p2_name}.txt"
+    
+@pytest.mark.parametrize('p1_points p2_points score p1_name p2_name'.split(), test_cases)
+def test_get_score_game(p1_points, p2_points, score, p1_name, p2_name):
+    game = TennisGame(p1_points, p2_points, p1_name, p2_name)
+    writetofile(getFileName(score, p1_name, p2_name), game.get_current_score_display())
+    assert score == game.get_current_score_display()
+
+if __name__ == "__main__":
+    unittest.main()
 
 test_cases = [
     (0, 0, "Love-All", 'player1', 'player2'),
@@ -46,14 +64,4 @@ test_cases = [
 
 ]
 
-def play_game(TennisGame1, p1Points, p2Points, p1Name, p2Name):
-    game = TennisGame1( p1Name, p2Name)
-    for i in range(max(p1Points, p2Points)):
-        if i < p1Points:
-            game.won_point(p1Name)
-        if i < p2Points:
-            game.won_point(p2Name)
-    return game
 
-if __name__ == "__main__":
-    unittest.main()

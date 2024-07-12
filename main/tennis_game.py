@@ -1,59 +1,44 @@
 # -*- coding: utf-8 -*-
-
-
+import constants
+import Player
 class TennisGame():
-    def __init__(self, player1_name, player2_name):
-        self.player1_name = player1_name
-        self.player2_name = player2_name
-        # consistence de nommage player1name vs p1
-        self.player1_points = 0
-        self.player2_points = 0
-        # objet pour comprendre le métier
+    def __init__(self,player1_points, player2_points, player1_name, player2_name):
+        self.Player1 = Player(player1_name)
+        self.Player2 = Player(player2_name)
+        self.Player1.set_score__number(player1_points)
+        self.Player2.set_score_as_number(player2_points)
+    
+    def get_current_score_display(self):
+        #faisons toutes les verifications sur les scores etc
+        self.run_pre_game_checks()
+        # GERONS LES DIFFERENTES SITUATIONS
+        # en situation d'égalité (situation de départ)
+        if self.are_scores_equal:
+            return self.score_with_equality()        
+        # en situation d'avantage
+        if self.is_advantage_situation:
+            return self.score_with_advantage()
+        # en situation de victoire
+        if self.someone_won:
+            return self.score_with_victory()
+        # en situation normale
+        return self.score_normal()
 
-    def won_point(self, player_name):
-        # fonction mal nommée diff avec action réele: increment player point
-        if player_name == "player1":
-            self.player1_points += 1
-        else:
-            self.player2_points += 1
-
-    def score(self):
-        result = ""
-        temp_score = 0
-        if (self.player1_points == self.player2_points):
-            result = {
-                # Fichier de constantes !! mal écrit
-                0: "Love-All",
-                1: "Fifteen-All",
-                2: "Thirty-All",
-            }.get(self.player1_points, "Deuce")  # Fichier de constantes !!
-            # boucle imbriquée
-            # pour gérer le flow du jeu
-        elif self.player1_points >= 4 or self.player2_points >= 4:
-            minus_result = self.player1_points - self.player2_points
-            if minus_result == 1:
-                result = "Advantage player1"
-            elif minus_result == -1:
-                result = "Advantage player2"
-            elif minus_result >= 2:
-                result = "Win for player1"
-            else:
-                result = "Win for player2"
-                # constante magigue
-                # explication du ouquoi + fonctions
-        else:
-            for i in range(1, 3):  # 1 a 3 ??? Constante à utiliser
-                if (i == 1):
-                    # Logique incompréhensible
-                    temp_score = self.player1_points
-                else:
-                    result += "-"
-                    # si c'est typé sinon erreur
-                    temp_score = self.player2_points
-                result += {
-                    0: "Love",
-                    1: "Fifteen",
-                    2: "Thirty",
-                    3: "Forty",
-                }[temp_score]
-        return result
+    def score_with_advantage():
+        return ADVANTAGE_PLAYER1 if self.player1_up_by ==1 else ADVANTAGE_PLAYER2
+    def score_with_equality():
+        return equality_table_till_forty[self.Player1.get_score_as_number]
+    def score_with_victory():
+        return winners["player1"] if self.player1_won else winners["player2"]
+    def score_normal():
+        return self.Player1.get_score_as_text + "-" + self.Player2.get_score_as_text
+    def run_pre_game_checks():
+        player1_points = self.Player1.get_score_as_number()
+        player2_points = self.Player2.get_score_as_number()
+        self.player1_up_by = player1_points - player2_points if player1_points - player2_points > 0 else 0
+        self.player2_up_by = player2_points - player1_points if player2_points - player1_points > 0 else 0
+        self.are_scores_equal = True if player1_points == player2_points else False
+        self.is_player1_up = True if player1_points - player2_points > 0 else False
+        self.someone_won = True if self.player1_up_by == 2 or self.player2_up_by == 2 else False
+        self.player1_won = True if self.player1_up_by == 2 else False
+        self.is_advantage_situation = True if (player1_points > 3 and player2_points > 3) and (self.player1_up_by == 1 or self.player2_up_by == 1) else False
