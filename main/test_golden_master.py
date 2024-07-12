@@ -37,9 +37,9 @@ class GoldenMasterTest(unittest.TestCase):
             file_name = f"{player1_score}-{player2_score}-{player1_name}-{player2_name}.txt"
             with open(os.path.join(self.Dir, file_name), "w") as f:
                 f.write(result)
-    
-    
+
     def test_replay(self):
+        self.set_up()
         for data in self.test_cases:
             player1_name, player2_name, player1_score, player2_score = data
             try:
@@ -47,10 +47,9 @@ class GoldenMasterTest(unittest.TestCase):
                 result = game.get_current_score_display()
             except Exception as e:
                 result = type(e).__name__ + " " + str(e)
-    
+
             file_name = f"{player1_score}-{player2_score}-{player1_name}-{player2_name}.txt"
             with open(os.path.join(self.Dir, file_name), "r") as f:
                 expected = f.read()
-    
-            print(self.assertMultiLineEqual(expected, result))
 
+            print(self.assertMultiLineEqual(expected, result))
