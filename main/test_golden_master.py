@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from main.tennis_game import TennisGame
+from tennis_game import TennisGame
 
 
 class GoldenMasterTest(unittest.TestCase):
@@ -24,26 +24,27 @@ class GoldenMasterTest(unittest.TestCase):
                 test_cases.append(("player1", "", player1_score, player2_score))
         return test_cases
 
-   # @unittest.skip("Skipping test_record")
+    @unittest.skip("Skipping test_record")
     def test_record(self):
         for data in self.test_cases:
             player1_name, player2_name, player1_score, player2_score = data
             try:
                 game = TennisGame(player1_score, player2_score, player1_name, player2_name)
-                result = self.get_current_score_display(game)
+                result = game.get_current_score_display()
             except Exception as e:
                 result = type(e).__name__ + " " + str(e)
 
             file_name = f"{player1_score}-{player2_score}-{player1_name}-{player2_name}.txt"
             with open(os.path.join(self.Dir, file_name), "w") as f:
                 f.write(result)
-    @unittest.TestCase
+    
+    
     def test_replay(self):
         for data in self.test_cases:
             player1_name, player2_name, player1_score, player2_score = data
             try:
                 game = TennisGame(player1_score, player2_score, player1_name, player2_name)
-                result = self.get_current_score_display(game)
+                result = game.get_current_score_display()
             except Exception as e:
                 result = type(e).__name__ + " " + str(e)
     
@@ -51,7 +52,5 @@ class GoldenMasterTest(unittest.TestCase):
             with open(os.path.join(self.Dir, file_name), "r") as f:
                 expected = f.read()
     
-            self.assertMultiLineEqual(expected, result)
+            print(self.assertMultiLineEqual(expected, result))
 
-    def get_current_score_display(self, game):
-        return game.get_current_score_display()

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-import constants
-import Player
+from constants import *
+import player
 
 class TennisGame():
     def __init__(self,player1_points, player2_points, player1_name, player2_name):
-        self.Player1 = Player(player1_name)
-        self.Player2 = Player(player2_name)
+        self.Player1 = player.Player(player1_name)
+        self.Player2 = player.Player(player2_name)
         self.Player1.update_score_from_number(player1_points)
         self.Player2.update_score_from_number(player2_points)
     
