@@ -10,7 +10,7 @@ class TennisGame():
         self.player2_points = 0
         # objet pour comprendre le métier
 
-    def won_point(self, player_name):
+    def increment_player_point(self, player_name):
         # fonction mal nommée diff avec action réele: increment player point
         if player_name == "player1":
             self.player1_points += 1
