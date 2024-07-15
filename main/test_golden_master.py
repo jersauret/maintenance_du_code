@@ -45,6 +45,7 @@ class GoldenMasterTest(unittest.TestCase):
             try:
                 game = TennisGame(player1_score, player2_score, player1_name, player2_name)
                 result = game.get_current_score_display()
+                print(data)
             except Exception as e:
                 result = type(e).__name__ + " " + str(e)
 

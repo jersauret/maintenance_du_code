@@ -2,50 +2,63 @@
 from constants import *
 import player
 
+
 class TennisGame():
-    def __init__(self,player1_points, player2_points, player1_name, player2_name):
-        self.is_advantage_situation = None
-        
-        self.is_player1_up = None
-        self.are_scores_equal = None
-        self.player2_up_by = None
-        self.player1_up_by = None
+    def __init__(self, player1_points, player2_points, player1_name, player2_name):
         self.Player1 = player.Player(player1_name)
         self.Player2 = player.Player(player2_name)
-        self.Player1.update_score_from_number(player1_points)
-        self.Player2.update_score_from_number(player2_points)
-    
+        self.player2_points = player2_points
+        self.player1_points = player1_points
+        self.player1_won = False
+        self.someone_won = False
+        self.is_advantage_situation = False
+
+        self.is_player1_up = False
+        self.are_scores_equal = False
+        self.player2_up_by = 0
+        self.player1_up_by = 0
+
     def get_current_score_display(self):
         #faisons toutes les verifications sur les scores etc
         self.run_pre_game_checks()
         # GERONS LES DIFFERENTES SITUATIONS
         # en situation d'égalité (situation de départ)
         if self.are_scores_equal:
-            return self.score_with_equality()        
-        # en situation d'avantage
+            return self.score_with_equality()
+            # en situation d'avantage
         if self.is_advantage_situation:
             return self.score_with_advantage()
         # en situation de victoire
         if self.someone_won:
             return self.score_with_victory()
         # en situation normale
-        return self.score_normal()
+        if not self.are_scores_equal:
+            return self.score_normal()
 
     def score_with_advantage(self):
-        return ADVANTAGE_PLAYER1 if self.player1_up_by ==1 else ADVANTAGE_PLAYER2
+        return ADVANTAGE_PLAYER1 if self.player1_up_by == 1 else ADVANTAGE_PLAYER2
+
     def score_with_equality(self):
-        return equality_table[self.Player1.get_score_as_number]
+        return equality_table[self.player1_points]
+
     def score_with_victory(self):
         return winners["player1"] if self.player1_won else winners["player2"]
+
     def score_normal(self):
-        return self.Player1.get_score_as_text + "-" + self.Player2.get_score_as_text
+        return self.get_player1_display_score() + "-" + self.get_player2_display_score()
+
     def run_pre_game_checks(self):
-        player1_points = self.Player1.get_score_as_number()
-        player2_points = self.Player2.get_score_as_number()
-        self.player1_up_by = player1_points - player2_points if player1_points - player2_points > 0 else 0
-        self.player2_up_by = player2_points - player1_points if player2_points - player1_points > 0 else 0
-        self.are_scores_equal = True if player1_points == player2_points else False
-        self.is_player1_up = True if player1_points - player2_points > 0 else False
-        self.someone_won = True if self.player1_up_by == 2 or self.player2_up_by == 2 else False
-        self.is_advantage_situation = True if (player1_points > 3 and player2_points > 3) and (self.player1_up_by == 1 or self.player2_up_by == 1) else False
+        self.player1_up_by = self.player1_points - self.player2_points if self.player1_points - self.player2_points > 0 else 0
+        self.player2_up_by = self.player2_points - self.player1_points if self.player2_points - self.player1_points > 0 else 0
+        self.are_scores_equal = True if self.player1_points == self.player2_points else False
+        self.is_player1_up = True if self.player1_points - self.player2_points > 0 else False
+        self.someone_won = True if self.player1_up_by == 3 or self.player2_up_by == 3 else False
+        self.is_advantage_situation = True if (self.player1_points > 3 and self.player2_points > 3) and (
+                self.player1_up_by == 1 or self.player2_up_by == 1) else False
         self.player1_won = True if self.player1_up_by == 2 else False
+
+    def get_player1_display_score(self):
+        return scores_text[self.player1_points]
+
+    def get_player2_display_score(self):
+        return scores_text[self.player2_points]
