@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 from constants import *
 import player
-
-
-class TennisGame():
+from constants import get_score_language
+class TennisGameMulti():
     def __init__(self, player1_points, player2_points, player1_name, player2_name):
         self.language = "fr"
         self.player2_won = False
@@ -39,16 +38,16 @@ class TennisGame():
             return self.score_normal()
 
     def score_with_advantage(self):
-        return ADVANTAGE_PLAYER1 if self.player1_up_by == 1 else ADVANTAGE_PLAYER2
+        return get_score_language("advantage_player1", self.language) if self.player1_up_by == 1  else get_score_language("advantage_player2", self.language)
 
     def score_with_equality(self):
-        return equality_table[self.player1_points] if self.player1_points < 3 else equality_table[3]
+        return get_score_language(self.player1_points, self.language) if self.player1_points < 3 else get_score_language("3", self.language)
 
     def score_with_victory(self):
-        return winners["player1"] if self.player1_won else winners["player2"]
+        return get_score_language("win_player1", self.language) if self.player1_won else  get_score_language("win_player2", self.language)
 
     def score_normal(self):
-        return scores_text[self.player1_points] + "-" + scores_text[self.player2_points]
+        return  get_score_language(self.player1_points, self.language) + "-" +   get_score_language(self.player2_points, self.language)
 
     def run_pre_game_checks(self):
         #equality
