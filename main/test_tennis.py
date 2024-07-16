@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import unittest
+#from tennis_game import TennisGame
+from tennis_game_multi import TennisGameMulti as TennisGame
 
 test_cases = [
     (0, 0, "Love-All", 'player1', 'player2'),
@@ -41,13 +44,11 @@ test_cases = [
     (14, 16, 'Win for player2', 'player1', 'player2'),
 ]
 
+
 def play_game(p1_points, p2_points, p1_name, p2_name):
     game = TennisGame(p1_points, p2_points, p1_name, p2_name)
     return game.get_current_score_display()
 
-
-import unittest
-from tennis_game import TennisGame
 
 class TestTennis(unittest.TestCase):
     def test_Score_Game1(self):
@@ -55,6 +56,7 @@ class TestTennis(unittest.TestCase):
             (p1Points, p2Points, score, p1Name, p2Name) = testcase
             game = play_game(p1Points, p2Points, p1Name, p2Name)
             self.assertEqual(score, game.get_current_score_display())
+
 
 if __name__ == "__main__":
     unittest.main()
