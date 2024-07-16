@@ -22,7 +22,6 @@ equality_table = {
     1: FIFTEEN_ALL,
     2: THIRTY_ALL,
     3: DEUCE,
-    4: DEUCE
 }
 
 scores_text = {
