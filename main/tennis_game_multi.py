@@ -46,8 +46,10 @@ class TennisGameMulti():
 
     def score_with_equality(self):
         scores_text = get_score_language(self.player1_points,
-                                         self.language) if self.player1_points < 3 else get_score_language("3", self.language)
-        return scores_text + "-" + scores_text 
+                                         self.language) if self.player1_points < 3 else get_score_language("3",
+                                                                                                           self.language)
+        return scores_text + "-" + scores_text
+
     def score_with_victory(self):
         return get_score_language("win_player1", self.language) if self.player1_won else get_score_language(
             "win_player2", self.language)

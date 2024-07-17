@@ -44,7 +44,46 @@ test_cases = [
     (14, 16, 'Win for player2', 'player1', 'player2'),
 ]
 
+test_cases_fr = [
+    (0, 0, "Zero-Partout", 'player1', 'player2'),
+    (1, 1, "Quinze-Partout", 'player1', 'player2'),
+    (2, 2, "Trente-Partout", 'player1', 'player2'),
+    (3, 3, "Egalité", 'player1', 'player2'),
+    (4, 4, "Egalité", 'player1', 'player2'),
 
+    (1, 0, "Quinze-Zero", 'player1', 'player2'),
+    (0, 1, "Zero-Quinze", 'player1', 'player2'),
+    (2, 0, "Trente-Zero", 'player1', 'player2'),
+    (0, 2, "Zero-Trente", 'player1', 'player2'),
+    (3, 0, "Quarante-Zero", 'player1', 'player2'),
+    (0, 3, "Zero-Quarante", 'player1', 'player2'),
+    (4, 0, "Victoire joueur1", 'player1', 'player2'),
+    (0, 4, "Victoire joueur2", 'player1', 'player2'),
+
+    (2, 1, "Trente-Quinze", 'player1', 'player2'),
+    (1, 2, "Quinze-Trente", 'player1', 'player2'),
+    (3, 1, "Quarante-Quinze", 'player1', 'player2'),
+    (1, 3, "Quinze-Quarante", 'player1', 'player2'),
+    (4, 1, "Victoire joueur1", 'player1', 'player2'),
+    (1, 4, "Victoire joueur2", 'player1', 'player2'),
+
+    (3, 2, "Quarante-Trente", 'player1', 'player2'),
+    (2, 3, "Trente-Quarante", 'player1', 'player2'),
+    (4, 2, "Victoire joueur1", 'player1', 'player2'),
+    (2, 4, "Victoire joueur2", 'player1', 'player2'),
+
+    (4, 3, "Avantage joueur1", 'player1', 'player2'),
+    (3, 4, "Avantage joueur2", 'player1', 'player2'),
+    (5, 4, "Avantage joueur1", 'player1', 'player2'),
+    (4, 5, "Avantage joueur2", 'player1', 'player2'),
+    (15, 14, "Avantage joueur1", 'player1', 'player2'),
+    (14, 15, "Avantage joueur2", 'player1', 'player2'),
+
+    (6, 4, "Victoire joueur1", 'player1', 'player2'),
+    (4, 6, "Victoire joueur2", 'player1', 'player2'),
+    (16, 14, "Victoire joueur1", 'player1', 'player2'),
+    (14, 16, "Victoire joueur2", 'player1', 'player2'),
+]
 def play_game(p1_points, p2_points, p1_name, p2_name):
     game = TennisGame(p1_points, p2_points, p1_name, p2_name)
     return game.get_current_score_display()
