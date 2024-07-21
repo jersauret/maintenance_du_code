@@ -32,6 +32,4 @@ Ces problèmes, bien que de gravités variables, affectent la lisibilité, la ma
 
 ## Golden Master
 
-Une fois terminé
-Comment je me sers du golden master pour garantir le contrat d'origine
-il casse et il reveint au vert quand on a modifié
+Nous nous servirons du golden master pour garantir la sécurisation du code.
