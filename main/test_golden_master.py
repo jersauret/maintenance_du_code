@@ -1,8 +1,9 @@
 import os
 import unittest
-
+## Pour tester la version française, il suffit d'activer l'import ci dessous
 from tennis_game_multi import TennisGameMulti as TennisGame
-
+## Pour tester la version anglaise, il suffit d'activer l'import ci dessous
+# from tennis_game import TennisGame as TennisGame
 
 class GoldenMasterTest(unittest.TestCase):
     Dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "expectedresults_fr")
